@@ -1,0 +1,262 @@
+---
+title: "rOpenSci"
+subtitle: ".lighty[_improving an R package_]"
+author: "Carolina Pradier"
+date: ".black[2023/06/09]"
+output:
+  xaringan::moon_reader:
+    css: xaringan-themer.css
+    lib_dir: libs
+    nature:
+      titleSlideClass: ["right", "middle"]
+      highlightStyle: github
+      countIncrementalSlides: false
+      ratio: 16:9
+
+---
+
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+
+style_mono_light(
+  base_color = "#1c5253",
+  header_font_google = google_font("Roboto"),
+  text_font_google   = google_font("Work Sans"),
+  code_font_google   = google_font("Work Sans"),
+  title_slide_text_color = "#216D6D",
+  colors = 
+    c(lightgreen = "#216D6D",
+    purple = "#8749AD",
+    lila = "#CF92F4",
+    black = "black",
+    green = "#1c5253",
+    darkgreen = "#104949",
+    white = "#FFFFFF",
+    lighty = "#E8EDED",
+    red = "#A43543",
+    yellow = "#F9A925")
+)
+```
+
+
+<style type="text/css">
+.remark-slide-content {
+    font-size: 25px;
+    padding: 1em 4em 4em 4em;
+}
+</style>
+
+
+
+.center[<img src="logo.png" width="50%" />]
+
+---
+
+class: left, bottom
+
+# Welcome!
+
+A .bg-lila[workflow] to improve a package
+
+
+---
+
+class: left, inverse, middle
+
+# Studying and understanding the package
+
+--
+
+**.black[1] .white[What do my functions do?]** 
+
+--
+
+**.black[2] .white[Dependencies]**
+
+--
+
+**.black[3] .white[User experience]**
+
+---
+
+class: right, top
+
+## What do my functions do?
+
+Are they easy to **.bg-lightgreen.white[read]**? Easy to modify? (Are there complex conditional structures?)
+
+Are my function's and arguments' .lila[names] intuitive? Are they consistent (e.g. snake_case or camelCase)? What about .purple[indentation]?
+
+Are they user-proof? Are errors and warnings against **.red[invalid inputs]**  easy to understand?
+
+.pull-left[.left[**Classify** them! (e.g.: functions to download and tidy data vs calculations and transformations)]]
+ 
+
+---
+
+
+class: right, top
+
+## Dependencies
+
+Does my package have **.bg-lightgreen.white[too many]** dependencies? (approx 20 max)
+
+Which *.yellow[function]* relies on each *.yellow[package]*? 
+
+How many *.yellow[functions]* from each *.yellow[package]* do we use?
+
+Can we obtain the same result using .white.bg-darkgreen[base R]?
+
+.lila[Imports] or .purple[Suggests]? (= .lila[user] or .purple[dev]?)   
+    
+    
+--
+
+</br>
+
+.pull-left[*Bonus:* make repetitive steps **automatic**!]
+
+---
+
+
+class: right, top
+
+## User experience
+
+**.red[Error]** and **.yellow[warning]** messages (are they clear and useful? do users speak *english*?)
+
+**Documentation** and **package site**
+
+
+
+
+.pull-left[Listening to users: are there any .bg-lila.black[issues]?]
+
+---
+
+class: left, inverse, middle
+
+# Improving the package
+
+--
+
+
+**.black[1] .white[Git branches, checks and tests]**
+
+--
+
+**.black[2] .white[Improve functions]**
+
+--
+
+**.black[3] .white[Reduce dependencies]**
+
+--
+
+**.black[4] .white[Improve (or add) messages]**
+ 
+
+---
+
+class: right, top
+
+## Git branches, checks and tests
+
+Using **.bg-lightgreen.white[git branches]** for big changes
+
+Running **.yellow[tests]** and **.red[checks]** frequently
+
+---
+
+class: right, top
+
+## Improve functions
+
+Before modifying a function: are there .bg-red.white[tests]? Using [testthat](https://testthat.r-lib.org/)
+
+.bg-yellow.black[early return] :)
+
+Ensure compatibility with older versions: .bg-lightgreen.white["..."]
+
+</br>
+
+.pull-left[.left[Improve **readability**: consider names, comments, conditional structures, etc.]]
+
+---
+
+class: right, top
+
+## Reduce dependencies
+
+Find low-hanging fruits!
+
+--
+
+Do not underestimate .white.bg-darkgreen[base R]
+
+.pull-left[.bg-lila[An example]: glue vs sprintf]
+
+</br>
+
+</br>
+
+```{r, eval=FALSE, tidy=TRUE}
+link= glue::glue('https://www.indec.gob.ar/ftp/cuadros
+                 /menusuperior/eph/EPH_usu_{trimester}_Trim_{year}_txt.zip')
+```
+
+```{r, eval=FALSE}
+link= sprintf('https://www.indec.gob.ar/ftp/cuadros
+              /menusuperior/eph/EPH_usu_%s_Trim_%s_txt.zip',
+              trimester,year)
+```
+
+
+---
+
+class: right, top
+
+## Improve (or add) messages and documentation
+
+Users shouldn’t need to have **expert knowledge** in order to work with your datasets.
+
+The [cli](https://cli.r-lib.org/) package
+
+---
+
+class: left, inverse, middle
+
+# Where to begin? 
+
+--
+
+**.black[1] .white[Your team]** 
+
+--
+
+**.black[2] .white[Resources]**
+
+---
+
+class: right, top
+
+## Your team
+
+Getting a mentor 
+
+---
+
+class: right, top
+
+## Books, talks and tutorials
+
+[Almost everything you need to know about R packages](https://cli.r-lib.org/)
+
+[Maëlle Salmon](https://github.com/maelle)'s amazing [resources](https://masalmon.eu/all/)
+
+Improving [functions](https://r4ds.had.co.nz/functions.html) and [function performance](https://adv-r.hadley.nz/perf-improve.html)
+
+What about [dependencies](https://r-pkgs.org/dependencies-mindset-background.html)?
+
+

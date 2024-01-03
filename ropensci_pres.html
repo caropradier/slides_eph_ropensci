@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>rOpenSci</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Carolina Pradier" />
+    <script src="libs/header-attrs-2.24/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: right, middle, title-slide
+
+.title[
+# rOpenSci
+]
+.subtitle[
+## .lighty[<em>improving an R package</em>]
+]
+.author[
+### Carolina Pradier
+]
+.date[
+### .black[2023/06/09]
+]
+
+---
+
+
+
+
+
+
+&lt;style type="text/css"&gt;
+.remark-slide-content {
+    font-size: 25px;
+    padding: 1em 4em 4em 4em;
+}
+&lt;/style&gt;
+
+
+
+.center[&lt;img src="logo.png" width="50%" /&gt;]
+
+---
+
+class: left, bottom
+
+# Welcome!
+
+A .bg-lila[workflow] to improve a package
+
+
+---
+
+class: left, inverse, middle
+
+# Studying and understanding the package
+
+--
+
+**.black[1] .white[What do my functions do?]** 
+
+--
+
+**.black[2] .white[Dependencies]**
+
+--
+
+**.black[3] .white[User experience]**
+
+---
+
+class: right, top
+
+## What do my functions do?
+
+Are they easy to **.bg-lightgreen.white[read]**? Easy to modify? (Are there complex conditional structures?)
+
+Are my function's and arguments' .lila[names] intuitive? Are they consistent (e.g. snake_case or camelCase)? What about .purple[indentation]?
+
+Are they user-proof? Are errors and warnings against **.red[invalid inputs]**  easy to understand?
+
+.pull-left[.left[**Classify** them! (e.g.: functions to download and tidy data vs calculations and transformations)]]
+ 
+
+---
+
+
+class: right, top
+
+## Dependencies
+
+Does my package have **.bg-lightgreen.white[too many]** dependencies? (approx 20 max)
+
+Which *.yellow[function]* relies on each *.yellow[package]*? 
+
+How many *.yellow[functions]* from each *.yellow[package]* do we use?
+
+Can we obtain the same result using .white.bg-darkgreen[base R]?
+
+.lila[Imports] or .purple[Suggests]? (= .lila[user] or .purple[dev]?)   
+    
+    
+--
+
+&lt;/br&gt;
+
+.pull-left[*Bonus:* make repetitive steps **automatic**!]
+
+---
+
+
+class: right, top
+
+## User experience
+
+**.red[Error]** and **.yellow[warning]** messages (are they clear and useful? do users speak *english*?)
+
+**Documentation** and **package site**
+
+
+
+
+.pull-left[Listening to users: are there any .bg-lila.black[issues]?]
+
+---
+
+class: left, inverse, middle
+
+# Improving the package
+
+--
+
+
+**.black[1] .white[Git branches, checks and tests]**
+
+--
+
+**.black[2] .white[Improve functions]**
+
+--
+
+**.black[3] .white[Reduce dependencies]**
+
+--
+
+**.black[4] .white[Improve (or add) messages]**
+ 
+
+---
+
+class: right, top
+
+## Git branches, checks and tests
+
+Using **.bg-lightgreen.white[git branches]** for big changes
+
+Running **.yellow[tests]** and **.red[checks]** frequently
+
+---
+
+class: right, top
+
+## Improve functions
+
+Before modifying a function: are there .bg-red.white[tests]? Using [testthat](https://testthat.r-lib.org/)
+
+.bg-yellow.black[early return] :)
+
+Ensure compatibility with older versions: .bg-lightgreen.white["..."]
+
+&lt;/br&gt;
+
+.pull-left[.left[Improve **readability**: consider names, comments, conditional structures, etc.]]
+
+---
+
+class: right, top
+
+## Reduce dependencies
+
+Find low-hanging fruits!
+
+--
+
+Do not underestimate .white.bg-darkgreen[base R]
+
+.pull-left[.bg-lila[An example]: glue vs sprintf]
+
+&lt;/br&gt;
+
+&lt;/br&gt;
+
+
+```r
+link= glue::glue('https://www.indec.gob.ar/ftp/cuadros
+                 /menusuperior/eph/EPH_usu_{trimester}_Trim_{year}_txt.zip')
+```
+
+
+```r
+link= sprintf('https://www.indec.gob.ar/ftp/cuadros
+              /menusuperior/eph/EPH_usu_%s_Trim_%s_txt.zip',
+              trimester,year)
+```
+
+
+---
+
+class: right, top
+
+## Improve (or add) messages and documentation
+
+Users shouldn’t need to have **expert knowledge** in order to work with your datasets.
+
+The [cli](https://cli.r-lib.org/) package
+
+---
+
+class: left, inverse, middle
+
+# Where to begin? 
+
+--
+
+**.black[1] .white[Your team]** 
+
+--
+
+**.black[2] .white[Resources]**
+
+---
+
+class: right, top
+
+## Your team
+
+Getting a mentor 
+
+---
+
+class: right, top
+
+## Books, talks and tutorials
+
+[Almost everything you need to know about R packages](https://cli.r-lib.org/)
+
+[Maëlle Salmon](https://github.com/maelle)'s amazing [resources](https://masalmon.eu/all/)
+
+Improving [functions](https://r4ds.had.co.nz/functions.html) and [function performance](https://adv-r.hadley.nz/perf-improve.html)
+
+What about [dependencies](https://r-pkgs.org/dependencies-mindset-background.html)?
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
